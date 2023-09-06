@@ -95,15 +95,12 @@ Stack* stack_push(Stack* stack, void* item){
             break;
         case STRING:
             stack->pStack = (char*) realloc(stack->pStack, sizeof(char[15])*stack->size);
-            ptr = (char*) stack->pStack+(stack->size-1);
-            printf("Push value: ");
+            ptr = (char*) stack->pStack+((stack->size-1)*15);
             while(*(char*)item != '\0'){
                 *(char*) ptr = *(char*) item;
-                printf("%c", *(char*) ptr);
                 ptr = (char*) ptr+1;
                 item = (char*) item+1;
             }
-            printf("\n");
             *(char*) ptr = '\0';
             break;
         default:
@@ -119,30 +116,24 @@ void stack_peak(Stack* stack){
     for(int i = 0; i < stack->size; i++){
         switch(stack->dataType){
             case INT:
-                printf("Value: %d\n", *(int*)location);
+                printf("Peak value: %d\n", *(int*)location);
                 location = (int*)location+1;
                 break;
             case FLOAT:
-                printf("Value: %g\n", *(float*)location);
+                printf("Peak value: %g\n", *(float*)location);
                 location = (float*)location+1;
                 break;
             case DOUBLE:
-                printf("Value: %g\n", *(double*)location);
+                printf("Peak value: %g\n", *(double*)location);
                 location = (double*)location+1;
                 break;
             case CHAR:
-                printf("Value: %c\n", *(char*)location);
+                printf("Peak value: %c\n", *(char*)location);
                 location = (char*)location+1;
                 break;
             case STRING:
-                printf("Peak value: ");
-                int i = 0;
-                while(*(char*) location != '\0'){
-                    printf("%c", *((char*) location+i));
-                    i++;
-                }
-                printf("\n");
-                location = (char*) location+16;
+                printf("Peak value: %s\n", (char*) location);
+                location = (char*) location+15;
                 break;
             default:
                 perror("Invalid data type\n");
