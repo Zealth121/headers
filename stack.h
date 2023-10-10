@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define INT 1
 #define FLOAT 2
@@ -13,7 +14,7 @@ typedef struct Stack{
     int dataType;
 }Stack;
 
-Stack* stack_init(Stack* stack, int dataType){
+void stack_init(Stack* stack, int dataType){
     stack->size = 0;
     stack->dataType = dataType;
     switch(dataType){
@@ -37,13 +38,12 @@ Stack* stack_init(Stack* stack, int dataType){
             exit(EXIT_FAILURE);
     }
     printf("Stack initalized\n");
-    return stack;
 }
 
-Stack* stack_pop(Stack* stack){
+bool stack_pop(Stack* stack){
     if(stack->size <= 0){
         printf("Can not be negative\n");
-        return stack;
+        return false;
     }
     stack->size--;
     switch(stack->dataType){
@@ -66,10 +66,10 @@ Stack* stack_pop(Stack* stack){
             perror("Invalid data type\n");
             exit(EXIT_FAILURE);
     }
-    return stack;
+    return true;
 }
 
-Stack* stack_push(Stack* stack, void* item){
+void stack_push(Stack* stack, void* item){
     stack->size++;
     void* ptr;
     switch(stack->dataType){
@@ -107,7 +107,6 @@ Stack* stack_push(Stack* stack, void* item){
             perror("Invalid data type\n");
             exit(EXIT_FAILURE);
     }
-    return stack;
 }
 
 void stack_peak(Stack* stack){

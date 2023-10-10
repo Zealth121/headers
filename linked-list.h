@@ -17,7 +17,7 @@ void list_print(){
     while(p != NULL){
         switch(p->dataType){
             case 1:
-                printf(" %d ", p->data);
+                printf(" %d ", (int*) p->data);
                 break;
             case 2:
 
