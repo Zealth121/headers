@@ -34,8 +34,10 @@ bool init_hash_table(){
 void print_table(){
     printf("Start\n");
     for(int i = 0; i < TABLE_SIZE; i++){
-        if(hash_table[i] == NULL || hash_table[i] == DELETED_NODE){
+        if(hash_table[i] == NULL){
             printf("\t%i\t---\n", i);
+        }else if(hash_table[i] == DELETED_NODE){
+            printf("\t%i\t---<deleted>\n", i);
         }else{
             printf("\t%i\t%s\n", i, hash_table[i]->name);
         }
